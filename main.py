@@ -1,3 +1,4 @@
+from gpiozero import LED
 from statechart import Statechart
 from yakindu.timer.timer_service import TimerService
 import time
@@ -6,15 +7,28 @@ class Callback:
     """State machine uses callback operations (here: _synchronize()_).
     """
 
+    led0 = LED(16)
+    led1 = LED(26)
+
     x0 = 0
-    x1 = 1
+    x1 = 0
 
     def __init__(self, statemachine):
         self.sm = statemachine
 
     def synchronize(self):
         self.x0 = self.sm.counter.x0
+        if (self.x0 == 1):
+            self.led0.on()
+        elif (self.x0 == 0):
+            self.led0.off()
+            
         self.x1 = self.sm.counter.x1
+        if (self.x1 == 1):
+            self.led1.on()
+        elif (self.x1 == 0):
+            self.led1.off()
+
         print(str(self.x1)+str(self.x0))
 
 class Main:
