@@ -29,8 +29,6 @@ class Callback:
         elif (self.x1 == 0):
             self.led1.off()
 
-        print(str(self.x1)+str(self.x0))
-
 class Main:
 
     def __init__(self):
@@ -46,7 +44,6 @@ class Main:
     def run(self):
         try:
             while True:
-                print("clock!")
                 self.sm.user.raise_clock()
                 time.sleep(1)
                 self.sm.run_cycle()
